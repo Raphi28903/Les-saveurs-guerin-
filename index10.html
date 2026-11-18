@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Planning Noël Saveurs Guérin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Agenda mensuel : 4 semaines (7 déc. → 3 janv.), une couleur par personne, vue liste sur téléphone */
+:root {
+  --bg: #f6f4f3; --surface: #ffffff; --ink: #241c18; --muted: #6d625c; --line: #e2dcd8; --out: #f1eeec;
+  --accent: #7a3e1d; --hatch: #ebe6e3;
+  --a: #0f766e; --a-bg: #d5f5ef; --a-ink: #0b4f4a;
+  --b: #be185d; --b-bg: #fde4f0; --b-ink: #831843;
+  --c: #6d28d9; --c-bg: #ece6fd; --c-ink: #4c1d95;
+  --v: #b45309; --v-bg: #fdf0cf; --v-ink: #7a3a08;
+  --g: #7a3e1d; --g-bg: #f3e4d9; --g-ink: #57290f;
+  --on-dot: #ffffff;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-text: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161210; --surface: #1f1a17; --ink: #f1ebe7; --muted: #b3a8a1; --line: #362f2b; --out: #1a1613;
+  --accent: #e8ad86; --hatch: #2a2421;
+  --a: #2dd4bf; --a-bg: rgba(45,212,191,.15); --a-ink: #a7f3e8;
+  --b: #f472b6; --b-bg: rgba(244,114,182,.15); --b-ink: #fbcfe8;
+  --c: #c4b5fd; --c-bg: rgba(167,139,250,.17); --c-ink: #ddd6fe;
+  --v: #fbbf24; --v-bg: rgba(251,191,36,.14); --v-ink: #fde68a;
+  --g: #e8ad86; --g-bg: rgba(232,173,134,.16); --g-ink: #f6d5bf;
+  --on-dot: #161210; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161210; --surface: #1f1a17; --ink: #f1ebe7; --muted: #b3a8a1; --line: #362f2b; --out: #1a1613;
+  --accent: #e8ad86; --hatch: #2a2421;
+  --a: #2dd4bf; --a-bg: rgba(45,212,191,.15); --a-ink: #a7f3e8;
+  --b: #f472b6; --b-bg: rgba(244,114,182,.15); --b-ink: #fbcfe8;
+  --c: #c4b5fd; --c-bg: rgba(167,139,250,.17); --c-ink: #ddd6fe;
+  --v: #fbbf24; --v-bg: rgba(251,191,36,.14); --v-ink: #fde68a;
+  --g: #e8ad86; --g-bg: rgba(232,173,134,.16); --g-ink: #f6d5bf;
+  --on-dot: #161210; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--f-text); font-size: 14px; line-height: 1.45; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 20px; }
+header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px 24px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 4vw, 38px); line-height: 1.05; margin: 4px 0 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 6px 0 0; max-width: 66ch; }
+
+.tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; flex-wrap: wrap; }
+.tabs button { font: inherit; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.lg { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; padding: 4px 10px 4px 4px; border-radius: 999px; }
+.lg.closed { padding-left: 10px; color: var(--muted); background: var(--surface); border: 1px dashed var(--line); }
+
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.dow { background: var(--surface); padding: 9px 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.day { background: var(--surface); min-height: 128px; padding: 8px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.day.out { background: var(--out); }
+.day.out .num { color: var(--muted); opacity: .55; }
+.day.closed { background-image: repeating-linear-gradient(135deg, var(--hatch) 0 7px, transparent 7px 14px); }
+.dhead { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+.num { font-family: var(--f-display); font-weight: 800; font-size: 20px; line-height: 1; font-variant-numeric: tabular-nums; }
+.num small { font-family: var(--f-text); font-weight: 600; font-size: 12px; color: var(--muted); margin-left: 4px; display: none; }
+.dayh { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.events { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+.chip { display: flex; align-items: center; gap: 7px; padding: 5px 8px 5px 5px; border-radius: 9px; min-width: 0; }
+.dot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 11px; color: var(--on-dot); flex: none; }
+.chip .txt { display: flex; flex-direction: column; min-width: 0; }
+.chip .t { font-weight: 600; font-size: 12.5px; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.chip .w { font-size: 11px; line-height: 1.25; opacity: .85; overflow-wrap: anywhere; }
+.pa { background: var(--a-bg); color: var(--a-ink); } .pa .dot { background: var(--a); }
+.pb { background: var(--b-bg); color: var(--b-ink); } .pb .dot { background: var(--b); }
+.pc { background: var(--c-bg); color: var(--c-ink); } .pc .dot { background: var(--c); }
+.pv { background: var(--v-bg); color: var(--v-ink); } .pv .dot { background: var(--v); }
+.pg { background: var(--g-bg); color: var(--g-ink); } .pg .dot { background: var(--g); }
+.shut { font-size: 12px; font-weight: 600; color: var(--muted); padding: 5px 8px; border-radius: 9px; background: var(--surface); border: 1px dashed var(--line); align-self: flex-start; }
+.note-out { font-size: 11px; color: var(--muted); }
+
+.people { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.card h3 .sw { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.card .place { font-size: 12px; color: var(--muted); margin-top: -6px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; margin: 0; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.weeks { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.wk { border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 11px; color: var(--muted); background: var(--bg); }
+.wk b { display: block; color: var(--ink); font-size: 13px; font-variant-numeric: tabular-nums; }
+.cost { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; border-top: 1px solid var(--line); padding-top: 10px; }
+.cost span { color: var(--muted); font-size: 12.5px; }
+.cost b { font-family: var(--f-display); font-size: 22px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.total { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.total .kv dt, .total .cost span, .total .place { color: inherit; opacity: .75; }
+.total .cost { border-color: rgba(127,127,127,.35); }
+
+.rules { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+.rules h2 { font-family: var(--f-display); font-size: 17px; margin: 0 0 8px; }
+.rules ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 92ch; }
+.rules li::marker { color: var(--accent); }
+
+@media (max-width: 780px) {
+  .cal { grid-template-columns: minmax(0, 1fr); }
+  .dow, .day.out { display: none; }
+  .day { min-height: 0; flex-direction: row; align-items: flex-start; gap: 12px; padding: 10px 12px; }
+  .dhead { flex-direction: column; align-items: flex-start; width: 84px; flex: none; gap: 3px; }
+  .num small { display: inline; }
+  .events { flex: 1; }
+}
+@media (prefers-reduced-motion: no-preference) { .tabs button { transition: background .15s, color .15s; } }
+.day.wkout { display: none; }
+@media print {
+  .tabs { display: none; }
+  .wrap { max-width: none; padding-block: 0; gap: 12px; }
+  .day { min-height: 98px; }
+  .rules { padding: 10px 14px; font-size: 12.5px; }
+  .card, .rules, .day { break-inside: avoid; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Les Saveurs Guérin · Noël 2026</div>
+      <h1 id="title">Chalet du village de Noël de Saintes</h1>
+      <p class="sub" id="subtitle"></p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Choisir le planning">
+      <button role="tab" id="tab-saintes" data-view="saintes" aria-selected="true">Saintes</button>
+      <button role="tab" id="tab-oleron" data-view="oleron" aria-selected="false">Château-d'Oléron</button>
+      <button role="tab" id="tab-stpalais" data-view="stpalais" aria-selected="false">Stand St-Palais</button>
+      <button role="tab" id="tab-boutique" data-view="boutique" aria-selected="false">Boutique</button>
+      <button role="tab" id="tab-tout" data-view="tout" aria-selected="false">Tout</button>
+    </div>
+  </header>
+
+  <div class="legend" id="legend"></div>
+  <div class="cal" id="cal" aria-live="polite"></div>
+  <section class="people" id="people" aria-label="Heures et coûts"></section>
+  <section class="rules" id="condbox">
+    <h2>Conditions de l'organisateur</h2>
+    <ul id="cond"></ul>
+  </section>
+  <section class="rules">
+    <h2>Ce que respecte le planning</h2>
+    <ul id="rules"></ul>
+  </section>
+</div>
+
+<script>
+(function () {
+  // Personnes : coût total estimé (salaire + dimanches/fériés + prime de fin de CDD + congés payés + charges restantes)
+  var P = {
+    A: { name: "Vendeur A", cls: "pa", color: "--a", place: "Chalet de Saintes · CDD 9 → 27 déc., avec heures supplémentaires", cost: 2680, net: 1700 },
+    B: { name: "Vendeur B", cls: "pb", color: "--b", place: "Chalet de Saintes · CDD temps partiel", cost: 1425, net: 885 },
+    C: { name: "Vendeur C", cls: "pc", color: "--c", place: "Chalet du Château-d'Oléron · CDD 19 déc. → 3 janv.", cost: 1790, net: 1120 },
+    D: { name: "Vendeur D", cls: "pb", color: "--b", place: "Stand de Saint-Palais · CDD 19 déc. → 4 janv.", cost: 2225, net: 1420 },
+    V: { name: "Vendeuse", cls: "pv", color: "--v", place: "Boutique Saint-Palais · CDD 35 h, 9 → 31 déc.", cost: 2320, net: 1505 },
+    G: { name: "Vous", cls: "pg", color: "--g", place: "Ce que les salariés ne peuvent pas couvrir", cost: null, net: null }
+  };
+  var EV = [];
+  function add(d, place, who, t, h) { EV.push({ d: d, place: place, who: who, t: t, h: h }); }
+  function dec(d) { return "2026-12-" + d; }
+
+  // Chalet de Saintes : lun–ven 14h–21h, week-ends 11h–21h, fermé 14 et 25 déc.
+  ["09","10","11","15","16","17","18","21","22","23","24"]
+    .forEach(function (d) { add(dec(d), "saintes", "A", "14h–21h", 7); });
+  ["12","13","19","20","26"]
+    .forEach(function (d) { add(dec(d), "saintes", "A", "11h–21h", 10); });
+  add(dec("27"), "saintes", "G", "11h–21h", 10);
+
+  // Château-d'Oléron : tous les jours 10h30–12h30 · 15h–19h, fermé le 25 déc.
+  var OL = "10h30–12h30 · 15h–19h";
+  ["2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-26","2026-12-27",
+   "2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02","2027-01-03"]
+    .forEach(function (d) { add(d, "oleron", "C", OL, 6); });
+  add("2026-12-28", "oleron", "G", OL, 6);
+
+  // Stand de Saint-Palais : tous les jours 11h–18h, fermé le 25 déc. et le 1er janv. (à confirmer)
+  ["2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-26","2026-12-27",
+   "2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-02","2027-01-03","2027-01-04"]
+    .forEach(function (d) { add(d, "stpalais", "D", "11h–18h", 7); });
+
+  // Boutique : vendeuse 9 → 31 déc.
+  var BQ = "10h–12h30 · 15h–19h";
+  ["09","10","11","12","15","16","17","18","19","21","22","23","24","26","28","29","30","31"]
+    .forEach(function (d) { add(dec(d), "boutique", "V", BQ, 6.5); });
+  ["13","20"].forEach(function (d) {
+    add(dec(d), "boutique", "V", "9h–12h30", 3.5);
+    add(dec(d), "boutique", "G", "15h–19h", 4);
+  });
+  add(dec("27"), "boutique", "G", "9h–12h30 · 15h–19h", 7.5);
+
+  var CLOSED = {
+    saintes: { "2026-12-14": "Fermé · repos", "2026-12-25": "Fermé · Noël" },
+    oleron: { "2026-12-25": "Fermé · Noël" },
+    stpalais: { "2026-12-25": "Fermé · Noël", "2027-01-01": "Fermé · jour férié" },
+    boutique: { "2026-12-14": "Fermé (lundi)", "2026-12-25": "Fermé · Noël", "2027-01-01": "Fermé · jour férié" }
+  };
+  var PERIOD = { saintes: ["2026-12-09", "2026-12-27"], oleron: ["2026-12-19", "2027-01-03"], stpalais: ["2026-12-19", "2027-01-04"],
+                 boutique: ["2026-12-09", "2026-12-31"], tout: ["2026-12-09", "2027-01-04"] };
+  var LBL = { saintes: "Saintes", oleron: "Oléron", stpalais: "Stand St-Palais", boutique: "Boutique" };
+  var COST_RULE = "Coût estimé : SMIC 12,31 €/h, dimanches +50 %, jours fériés +25 %, prime de fin de CDD 10 %, congés payés 10 %, charges après réduction de l'État.";
+
+  var C_SA = [
+    "Ouvrir le chalet et l'occuper tous les jours du mercredi 9 au dimanche 27 décembre inclus.",
+    "Du lundi au vendredi de 14h à 21h, les week-ends de 11h à 21h.",
+    "À valider : le planning ferme le chalet le lundi 14 et le vendredi 25, alors que le règlement demande de l'occuper tous les jours. Si le village est ouvert ces jours-là, c'est l'un de vous qui tient le chalet.",
+    "Chalet à 270 €. Réassort 3 fois par semaine." ];
+  var C_OL = [
+    "Place de la République, Le Château-d'Oléron. Organisé par la mairie et l'association Le Village de Noël.",
+    "Tous les jours du samedi 19 décembre au dimanche 3 janvier, sauf le 25 décembre.",
+    "Horaires : 10h30–12h30 et 15h–19h.",
+    "Chalet à 130 €. Réassort 3 fois par semaine." ];
+  var C_SP = [
+    "Place face à la plage, 1re édition. Chocolat chaud et cookies.",
+    "Du samedi 19 décembre au lundi 4 janvier, de 11h à 18h.",
+    "À confirmer avec l'organisateur : fermeture le 25 décembre et le 1er janvier.",
+    "À vérifier : le stand doit faire partie du marché de Noël municipal pour que le vendeur travaille le dimanche après-midi." ];
+  function pre(label, list) { return list.map(function (x) { return label + " : " + x; }); }
+  var VIEWS = {
+    saintes: { title: "Chalet du village de Noël de Saintes",
+      sub: "Du mercredi 9 au dimanche 27 décembre. Ouvert du lundi au vendredi de 14h à 21h, les week-ends de 11h à 21h. Fermé le 14 et le 25 décembre.",
+      people: ["A", "G"], places: ["saintes"], cond: C_SA,
+      rules: [
+        "Un seul vendeur, 6 jours par semaine au maximum : ses repos sont le lundi 14 et le vendredi 25 (chalet fermé) et le dimanche 27.",
+        "Semaine du 14 décembre : 48 h, le maximum légal. Environ 22 heures supplémentaires sur la période, payées +25 % (+50 % au-delà de 43 h dans la semaine).",
+        "Le dimanche se travaille toute la journée sur un marché municipal. Il travaille le 13 et le 20 ; vous tenez le chalet le 27, car il doit garder 2 dimanches de repos en décembre.",
+        "Le samedi et le dimanche, 11h–21h fait déjà 10 h, le maximum par jour : l'installation avant 11h et la caisse après 21h sont pour vous. Prévoyez sa pause de 20 minutes (relève au moment du réassort).",
+        "Personne pour le remplacer s'il est malade : gardez un plan B.",
+        COST_RULE ] },
+    oleron: { title: "Village de Noël du Château-d'Oléron",
+      sub: "Place de la République. Du samedi 19 décembre au dimanche 3 janvier, tous les jours sauf le 25 décembre. Ouvert de 10h30 à 12h30 et de 15h à 19h.",
+      people: ["C", "G"], places: ["oleron"], cond: C_OL,
+      rules: [
+        "Un seul vendeur suffit : 6 h par jour, avec la coupure de 12h30 à 15h comme pause.",
+        "6 jours par semaine au maximum : son repos est le 25 décembre (chalet fermé) et le lundi 28 décembre. Vous tenez le chalet le 28.",
+        "Semaines du 21 et du 28 décembre : 36 h, soit 1 heure supplémentaire payée +25 % chaque semaine.",
+        "Dimanches 20 et 27 décembre et 3 janvier travaillés (marché municipal). En décembre, il garde ses 2 dimanches de repos (6 et 13, avant son arrivée).",
+        "Le 1er janvier est un jour férié : ses 6 h sont payées +25 %. Le SMIC sera sans doute revalorisé au 1er janvier 2027 : quelques euros de plus.",
+        COST_RULE ] },
+    stpalais: { title: "Stand de Noël de Saint-Palais-sur-Mer",
+      sub: "Chocolat chaud et cookies sur la place face à la plage. Du samedi 19 décembre au lundi 4 janvier, de 11h à 18h. Fermé le 25 décembre et le 1er janvier (à confirmer).",
+      people: ["D"], places: ["stpalais"], cond: C_SP,
+      rules: [
+        "Un seul vendeur, 6 jours par semaine au maximum : ses repos sont le 25 décembre et le 1er janvier (stand fermé).",
+        "Semaines du 21 et du 28 décembre : 42 h, soit 7 heures supplémentaires payées +25 % chaque semaine.",
+        "Dimanches 20 et 27 décembre et 3 janvier travaillés toute la journée : possible seulement si le stand fait partie du marché de Noël municipal. Sinon, le dimanche, un salarié ne peut travailler que jusqu'à 13h.",
+        "7 h d'affilée : il a droit à 20 minutes de pause. La boutique est à côté : l'un de vous le relève.",
+        COST_RULE ] },
+    boutique: { title: "Boutique de Saint-Palais-sur-Mer",
+      sub: "CDD de la vendeuse du mercredi 9 au jeudi 31 décembre. Boutique ouverte de 10h à 12h30 et de 15h à 19h, le dimanche dès 9h. Fermée le lundi avant les vacances, le 25 décembre et le 1er janvier.",
+      people: ["V", "G"], places: ["boutique"],
+      rules: [
+        "6 jours par semaine au maximum, avec un jour de repos chaque semaine.",
+        "Le dimanche, la vendeuse ne peut travailler que le matin, jusqu'à 13h (commerce alimentaire). Vous tenez l'après-midi.",
+        "2 dimanches de repos en décembre pour elle : le 6 (avant son arrivée) et le 27.",
+        "Semaine du 14 décembre : 36 h, soit 1 heure supplémentaire payée +25 %.",
+        COST_RULE ] },
+    tout: { title: "Tout le planning de Noël",
+      sub: "Le chalet de Saintes, le chalet du Château-d'Oléron, le stand et la boutique de Saint-Palais sur le même calendrier, du 9 décembre au 4 janvier.",
+      people: ["A", "C", "D", "V", "G"], places: ["saintes", "oleron", "stpalais", "boutique"],
+      cond: pre("Saintes", C_SA).concat(pre("Oléron", C_OL), pre("Stand St-Palais", C_SP)),
+      rules: [
+        "Chaque salarié est embauché par la micro-entreprise qui exploite le lieu où il travaille.",
+        "À ajouter aux coûts : la médecine du travail, environ 100 € par salarié, et la mutuelle si le salarié ne la refuse pas par écrit.",
+        "Déclaration d'embauche à l'Urssaf avant le 1er jour de chacun (le TESE la fait pour vous)." ] }
+  };
+
+  var DOW = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+  var DOWL = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+  var MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+  var START = new Date(2026, 11, 7);
+  function iso(dt) { return dt.getFullYear() + "-" + String(dt.getMonth() + 1).padStart(2, "0") + "-" + String(dt.getDate()).padStart(2, "0"); }
+  function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmtH(h) { var e = Math.floor(h), m = Math.round((h - e) * 60); return e + " h" + (m ? " " + String(m).padStart(2, "0") : ""); }
+  function euro(n) { return "≈ " + n.toLocaleString("fr-FR") + " €"; }
+  function el(tag, cls, html) { var x = document.createElement(tag); if (cls) x.className = cls; if (html != null) x.innerHTML = html; return x; }
+  function dot(k) { var d = el("span", "dot", k === "G" ? "★" : k); d.style.background = "var(" + P[k].color + ")"; return d; }
+
+  function stats(k, places) {
+    var evs = EV.filter(function (e) { return e.who === k && places.indexOf(e.place) >= 0; });
+    var h = 0, days = {}, sundays = [], weeks = [0, 0, 0, 0, 0];
+    evs.forEach(function (e) {
+      h += e.h; days[e.d] = 1;
+      var dt = parse(e.d), wi = Math.floor((dt - START) / 864e5 / 7);
+      if (wi >= 0 && wi < 5) weeks[wi] += e.h;
+      if (dt.getDay() === 0 && sundays.indexOf(e.d) < 0) sundays.push(e.d);
+    });
+    var sun = sundays.sort().map(function (s) { var d = parse(s); return d.getDate() + " " + MOIS[d.getMonth()]; });
+    return { h: h, days: Object.keys(days).length, sun: sun.length ? sun.length + " (" + sun.join(", ") + ")" : "0", weeks: weeks };
+  }
+
+  function render(view) {
+    var V = VIEWS[view];
+    document.getElementById("title").textContent = V.title;
+    document.getElementById("subtitle").textContent = V.sub;
+    Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (b) {
+      b.setAttribute("aria-selected", b.dataset.view === view ? "true" : "false");
+    });
+
+    var lg = document.getElementById("legend"); lg.innerHTML = "";
+    V.people.forEach(function (k) {
+      var x = el("span", "lg " + P[k].cls); x.appendChild(dot(k)); x.appendChild(document.createTextNode(P[k].name)); lg.appendChild(x);
+    });
+    lg.appendChild(el("span", "lg closed", "Fermé"));
+
+    var cal = document.getElementById("cal"); cal.innerHTML = "";
+    DOW.forEach(function (d) { cal.appendChild(el("div", "dow", d)); });
+    var per = PERIOD[view];
+    for (var i = 0; i < 35; i++) {
+      var dt = new Date(START); dt.setDate(START.getDate() + i);
+      var key = iso(dt), wd = (dt.getDay() + 6) % 7;
+      var evs = EV.filter(function (e) { return e.d === key && V.places.indexOf(e.place) >= 0; })
+                  .sort(function (a, b) { return V.places.indexOf(a.place) - V.places.indexOf(b.place); });
+      var closed = V.places.map(function (pl) {
+        var c = CLOSED[pl] && CLOSED[pl][key];
+        var inP = key >= PERIOD[pl][0] && key <= PERIOD[pl][1];
+        return c && inP ? (view === "tout" ? LBL[pl] + " : " : "") + c : null;
+      }).filter(Boolean);
+      var inPeriod = key >= per[0] && key <= per[1];
+      var cell = el("div", "day");
+      if (!inPeriod && !evs.length && !closed.length) cell.classList.add("out");
+      if (closed.length && !evs.length) cell.classList.add("closed");
+      var head = el("div", "dhead"), num = el("div", "num", String(dt.getDate()));
+      num.appendChild(el("small", null, DOWL[wd] + " " + MOIS[dt.getMonth()]));
+      head.appendChild(num);
+      var tot = evs.reduce(function (s, e) { return s + (e.who === "G" ? 0 : e.h); }, 0);
+      if (tot) head.appendChild(el("div", "dayh", fmtH(tot) + " salariés"));
+      cell.appendChild(head);
+      var box = el("div", "events");
+      evs.forEach(function (e) {
+        var c = el("div", "chip " + P[e.who].cls); c.appendChild(dot(e.who));
+        var t = el("span", "txt");
+        t.appendChild(el("span", "t", e.t));
+        t.appendChild(el("span", "w", (view === "tout" ? LBL[e.place] + " · " : "") + P[e.who].name + " · " + fmtH(e.h)));
+        c.appendChild(t); box.appendChild(c);
+      });
+      closed.forEach(function (c) { box.appendChild(el("div", "shut", c)); });
+      cell.appendChild(box);
+      cal.appendChild(cell);
+    }
+    // Masquer les semaines entièrement hors période
+    var cells = cal.querySelectorAll(".day");
+    for (var w = 0; w < cells.length; w += 7) {
+      var allOut = true;
+      for (var j = w; j < w + 7; j++) { if (!cells[j].classList.contains("out")) { allOut = false; break; } }
+      if (allOut) for (var j2 = w; j2 < w + 7; j2++) cells[j2].classList.add("wkout");
+    }
+
+    var pe = document.getElementById("people"); pe.innerHTML = "";
+    var sum = 0, sumNet = 0, n = 0, labels = ["7 déc.", "14 déc.", "21 déc.", "28 déc.", "4 janv."];
+    V.people.forEach(function (k) {
+      var p = P[k], s = stats(k, V.places), c = el("article", "card");
+      var h = el("h3"), sw = el("span", "sw"); sw.style.background = "var(" + p.color + ")";
+      h.appendChild(sw); h.appendChild(document.createTextNode(p.name)); c.appendChild(h);
+      c.appendChild(el("div", "place", p.place));
+      c.appendChild(el("dl", "kv", "<dt>Heures</dt><dd>" + fmtH(s.h) + "</dd><dt>Jours</dt><dd>" + s.days +
+        "</dd><dt>Dimanches</dt><dd>" + s.sun + "</dd>"));
+      var w = el("div", "weeks");
+      s.weeks.forEach(function (x, j) { w.appendChild(el("div", "wk", "<b>" + (x ? fmtH(x) : "–") + "</b>sem. " + labels[j])); });
+      c.appendChild(w);
+      if (p.cost) {
+        c.appendChild(el("div", "cost", "<span>Coût total pour vous<br>net touché " + euro(p.net) + "</span><b>" + euro(p.cost) + "</b>"));
+        sum += p.cost; sumNet += p.net; n++;
+      } else {
+        c.appendChild(el("div", "cost", "<span>Votre temps, sans coût en plus</span><b>—</b>"));
+      }
+      pe.appendChild(c);
+    });
+    if (n > 1) {
+      var t = el("article", "card total");
+      t.appendChild(el("h3", null, "Total salariés"));
+      t.appendChild(el("div", "place", n + " contrats · médecine du travail en plus (≈ 100 € chacun)"));
+      t.appendChild(el("dl", "kv", "<dt>Net versé</dt><dd>" + euro(sumNet) + "</dd>"));
+      t.appendChild(el("div", "cost", "<span>Coût total pour vous</span><b>" + euro(sum) + "</b>"));
+      pe.appendChild(t);
+    }
+
+    var ul = document.getElementById("rules"); ul.innerHTML = "";
+    V.rules.forEach(function (r) { ul.appendChild(el("li", null, r)); });
+    var cl = document.getElementById("cond"); cl.innerHTML = "";
+    (V.cond || []).forEach(function (r) { cl.appendChild(el("li", null, r)); });
+    document.getElementById("condbox").hidden = !(V.cond && V.cond.length);
+    try { localStorage.setItem("planning-noel-vue", view); } catch (e) {}
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (b) {
+    b.addEventListener("click", function () { render(b.dataset.view); });
+  });
+  var first = "saintes";
+  try { var s = localStorage.getItem("planning-noel-vue"); if (s && VIEWS[s]) first = s; } catch (e) {}
+  render(first);
+})();
+</script>
+
+</body>
+</html>
